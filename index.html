@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="google-site-verification" content="cxWe-t4HSXc9ot50Z3kefYPI-9WLJUOClE7xKvOM0Q8" />
+    <meta name="google-site-verification" content="Ig_HsJf-WI2UP2deOdHn_oRMmM46uMDOGc2H1vrZT_Q" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area 420</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="title">Area 420</div>
+        <div class="description">
+            Please be respectful & responsive. This website provides access to all the assignments, tutorials, and workbook PDFs for free.
+        </div>
+
+        <div class="search-container">
+            <input type="text" class="search-bar" id="search-bar" placeholder="Search..." oninput="searchSubjects()">
+        </div>
+
+        <div class="file-names" id="file-names">
+            <div class="file-name"><a href="#" onclick="showPage('CSE')">CSE</a></div>
+            <div class="file-name"><a href="#" onclick="showPage('AI&DS')">AI&DS</a></div>
+            <div class="file-name"><a href="#" onclick="showPage('CSIT')">CSIT</a></div>
+        </div>
+
+        <!-- CSE Page -->
+        <div id="CSE" class="content-page">
+            <h3>CSE Subjects</h3>
+            <div class="subject-list">
+                <a href="#" onclick="showResources('FSAD', 'CSE')">FSAD</a>
+                <a href="#" onclick="showResources('MP', 'CSE')">MP</a>
+                <a href="#" onclick="showResources('AOOP', 'CSE')">AOOP</a>
+                <a href="#" onclick="showResources('DBMS', 'CSE')">DBMS</a>
+            </div>
+        </div>
+
+        <!-- AI&DS Page -->
+        <div id="AI&DS" class="content-page">
+            <h3>AI&DS Subjects</h3>
+            <div class="subject-list">
+                <a href="#" onclick="showResources('DL', 'AI&DS')">DL</a>
+                <a href="#" onclick="showResources('FSAD', 'AI&DS')">FSAD</a>
+                <a href="#" onclick="showResources('DAA', 'AI&DS')">DAA</a>
+                <a href="#" onclick="showResources('MP', 'AI&DS')">MP</a>
+            </div>
+        </div>
+
+        <!-- CSIT Page -->
+        <div id="CSIT" class="content-page">
+            <h3>CSIT Subjects</h3>
+            <div class="subject-list">
+                <a href="#" onclick="showResources('FSAD', 'CSIT')">FSAD</a>
+                <a href="#" onclick="showResources('MP', 'CSIT')">MP</a>
+                <a href="#" onclick="showResources('AOOP', 'CSIT')">AOOP</a>
+                <a href="#" onclick="showResources('DBMS', 'CSIT')">DBMS</a>
+            </div>
+        </div>
+
+        <!-- Resources Page -->
+        <div id="resources" class="content-page">
+            <h3>Resources for <span id="subject-name"></span></h3>
+            <div class="resource-list">
+                <a href="#" onclick="showAssignments()">Assignments</a>
+                <a href="#" onclick="showTutorials()">Tutorials</a>
+                <a href="#" onclick="showLWorkbooks()">L Workbook</a>
+                <a href="#" onclick="showSWorkbooks()">S Workbook</a>
+            </div>
+        </div>
+
+        <!-- Assignments -->
+        <div id="assignments" class="content-page">
+            <h3>Assignments</h3>
+            <div class="resource-items" id="assignments-list">
+                <a href="#" id="assignment-1-link">Assignment 1</a>
+                <a href="#" id="assignment-2-link">Assignment 2</a>
+                <a href="#" id="assignment-3-link">Assignment 3</a>
+                <a href="#" id="assignment-4-link">Assignment 4</a>
+                <a href="#" id="assignment-5-link">Assignment 5</a>
+                <a href="#" id="assignment-6-link">Assignment 6</a>
+            </div>
+        </div>
+
+        <!-- Tutorials -->
+        <div id="tutorials" class="content-page">
+            <h3>Tutorials</h3>
+            <div class="resource-items">
+                <a href="#">Tutorial 1</a>
+                <a href="#">Tutorial 2</a>
+                <a href="#">Tutorial 3</a>
+                <a href="#">Tutorial 4</a>
+            </div>
+        </div>
+
+        <!-- L Workbooks -->
+        <div id="l-workbooks" class="content-page">
+            <h3>L Workbooks</h3>
+            <div class="resource-items">
+                <a href="#">Week 1</a>
+                <a href="#">Week 2</a>
+                <a href="#">Week 3</a>
+                <a href="#">Week 4</a>
+            </div>
+        </div>
+
+        <!-- S Workbooks -->
+        <div id="s-workbooks" class="content-page">
+            <h3>S Workbooks</h3>
+            <div class="resource-items">
+                <a href="#">Week 1</a>
+                <a href="#">Week 2</a>
+                <a href="#">Week 3</a>
+                <a href="#">Week 4</a>
+            </div>
+        </div>
+
+        <!-- Upload Section -->
+        <div id="upload-section" class="content-page">
+            <h3>Upload Resources</h3>
+            <input type="file" id="file-upload" />
+            <button onclick="uploadFile()">Upload</button>
+            <div id="uploaded-links" class="resource-items"></div>
+        </div>
+    </div>
+
+    <div class="question-icon" onclick="toggleHelpOptions()">?</div>
+    <div class="help-options" id="help-options">
+        <a href="https://t.me/students_of_klu">Telegram</a>
+    </div>
+
+    <div class="popup-overlay" id="popup-overlay">
+        <div class="popup">
+            <p>Please login to use the website</p>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to display resources based on subject and course
+        function showResources(subject, course) {
+            document.getElementById("resources").style.display = "block";
+            document.getElementById("subject-name").textContent = subject;
+
+            // Check if FSAD is selected and show the corresponding assignments for CSE, AI&DS, or CSIT
+            if (subject === "FSAD" && course === "CSE") {
+                document.getElementById("assignment-1-link").setAttribute("href", "https://store9.gofile.io/download/386eec81-9d59-4f00-b45a-66e1ba5f67bc/FSAD%20LAB%20-%201%20WORKBOOK%20Answer_THANOS_.pdf");
+                document.getElementById("assignment-1-link").setAttribute("download", "Assignment_1.pdf");
+                document.getElementById("assignment-2-link").setAttribute("href", "https://store2.gofile.io/download/e5c9c74f-51c0-4c62-b351-9c3de1b11701/FSAD%20LAB%20-%202%20WORKBOOK%20Answer_THANOS_.pdf");
+                document.getElementById("assignment-2-link").setAttribute("download", "Assignment_2.pdf");
+                document.getElementById("assignment-3-link").setAttribute("href", "https://store-na-phx-1.gofile.io/download/0227bd9d-deb4-4361-8f13-5820805e0ddd/FSAD%20LAB%20-%203%20WORKBOOK%20Answer_THANOS_.pdf");
+                document.getElementById("assignment-3-link").setAttribute("download", "Assignment_3.pdf");
+                document.getElementById("assignment-4-link").setAttribute("href", "https://store10.gofile.io/download/878c86b6-fe30-461b-b8d1-f54bedaa32c7/FSAD%20LAB%20-%204%20WORKBOOK%20Answer_THANOS_.pdf");
+                document.getElementById("assignment-4-link").setAttribute("download", "Assignment_4.pdf");
+                document.getElementById("assignment-5-link").setAttribute("href", "https://store-eu-par-4.gofile.io/download/907b5012-cc7c-4e8b-9b29-7ed278029023/FSAD%20LAB%20-%205%20WORKBOOK%20Answer_THANOS_.pdf");
+                document.getElementById("assignment-5-link").setAttribute("download", "Assignment_5.pdf");
+                document.getElementById("assignment-6-link").setAttribute("href", "https://store1.gofile.io/download/de155b97-3c64-4fef-bb04-78b119594451/FSAD%20LAB%20-%206%20WORKBOOK%20Answer_THANOS_.pdf");
+                document.getElementById("assignment-6-link").setAttribute("download", "Assignment_6.pdf");
+
+            } else {
+                // Default behavior for other subjects
+                document.getElementById("assignment-1-link").setAttribute("href", "#");
+                document.getElementById("assignment-1-link").removeAttribute("download");
+                document.getElementById("assignment-2-link").setAttribute("href", "#");
+                document.getElementById("assignment-2-link").removeAttribute("download");
+                document.getElementById("assignment-3-link").setAttribute("href", "#");
+                document.getElementById("assignment-3-link").removeAttribute("download");
+                document.getElementById("assignment-4-link").setAttribute("href", "#");
+                document.getElementById("assignment-4-link").removeAttribute("download");
+                document.getElementById("assignment-5-link").setAttribute("href", "#");
+                document.getElementById("assignment-5-link").removeAttribute("download");
+                document.getElementById("assignment-6-link").setAttribute("href", "#");
+                document.getElementById("assignment-6-link").removeAttribute("download");
+            }
+        }
+
+        // Search function for filtering subject names
+        function searchSubjects() {
+            let input = document.getElementById("search-bar").value.toLowerCase();
+            let fileNames = document.getElementById("file-names").getElementsByClassName("file-name");
+            Array.from(fileNames).forEach(fileName => {
+                let text = fileName.textContent.toLowerCase();
+                if (text.includes(input)) {
+                    fileName.style.display = "block";
+                } else {
+                    fileName.style.display = "none";
+                }
+            });
+        }
+
+       
+    </script>
+
+    <script src="script.js"></script>
+</body>
+          </html>
